@@ -167,7 +167,7 @@ def main():
     data_path = args.data
 
     print(80*'*')
-    print('This application uses machine learning to predict basic properties of a molecule')
+    print('This application uses machine learning to predict basic properties of a molecule from its fingerprint features')
     print(80*'*')
     print('[INFO] Start processing ...')
 
