@@ -142,22 +142,25 @@ This project is organized as follow
 ├── README.md
 ├── run_flask_api.sh
 ├── servier
-│ ├── cli.py
-│ ├── data
-│ │ ├── dataset_multi.csv
-│ │ └── dataset_single.csv
-│ ├── media
-│ │ ├── test_api.png
-│ │ ├── test_flask.png
-│ │ └── test_terminal.png
-│ ├── models
-│ │ ├── model_pred_multi.bin
-│ │ └── model_pred_single.bin
-│ └── src
-│ ├── flask_api.py
-│ ├── config.py
-│ ├── feature_extractor.py
-│ └── main.py
+│   ├── cli.py
+│   ├── data
+│   │   ├── dataset_multi.csv
+│   │   ├── dataset_single.csv
+│   │   └── dataset_single_folds.csv
+│   ├── __init_.py
+│   ├── media
+│   │   ├── P1.png
+│   │   ├── test_api.png
+│   │   ├── test_flask.png
+│   │   └── test_terminal.png
+│   ├── models
+│   │   ├── model_pred_multi.bin
+│   │   └── model_pred_single.bin
+│   └── src
+│       ├── config.py
+│       ├── feature_extractor.py
+│       ├── flask_api.py
+│       └── main.py
 └── setup.py
 ```
 
