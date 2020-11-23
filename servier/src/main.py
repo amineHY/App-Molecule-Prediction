@@ -11,7 +11,7 @@ import servier.src.config as config
 import servier.src.feature_extractor as fe
 
 
-def LoadData(path=config.path_single):
+def LoadAndProcessData(path=config.path_single):
 
     print('[INFO] Load the data and extract features')
     isinstance(path, str)
@@ -98,7 +98,7 @@ def Train(data_path=config.MODEL_OUTPUT['single']):
 
     isinstance(data_path, str)
     # Load and split  dataset
-    X, y = LoadData(data_path)
+    X, y = LoadAndProcessData(data_path)
     X_train, X_valid, y_train, y_valid = SplitDataset(X, y)
 
     print('[INFO] Train a regression model')
@@ -133,7 +133,7 @@ def Predict(X_test=None):
 
     """
     if isinstance(X_test, str):
-        X_test, y_test = LoadData(X_test)
+        X_test, y_test = LoadAndProcessData(X_test)
     elif isinstance(X_test, pd.DataFrame) or isinstance(X_test, np.array):
         pass
     else:

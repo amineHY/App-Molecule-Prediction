@@ -41,7 +41,7 @@ In addition, a Flask API is developed to perform prediction
 `dataset_single.csv`
 
 ```python
-P1	mol_id	smiles
+    P1	mol_id	    smiles
 0	1	CID2999678	Cc1cccc(N2CCN(C(=O)C34CC5CC(CC(C5)C3)C4)CC2)c1C
 1	0	CID2999679	Cn1ccnc1SCC(=O)Nc1ccc(Oc2ccccc2)cc1
 2	1	CID2999672	COc1cc2c(cc1NC(=O)CN1C(=O)NC3(CCc4ccccc43)C1=O...
@@ -51,7 +51,7 @@ P1	mol_id	smiles
 
 1. The target we want to predict is binary, 0 or 1. A classification model (such as RandomForest) is suitable for this problem
    ![P1](servier/media/P1.png)
-2. The dataset is unbalanced, i.e. it has a unbalanced target (`P1`), with 82.17% (4108) 1's and 17.82% (891) of 0's
+2. The target (`P1`) had 82.17% (4108) of 1's and 17.82% (891) of 0's
 
    ```
    1 - 82.17 % - 4108
@@ -63,7 +63,7 @@ P1	mol_id	smiles
 4. Load dataset and create features `X` and target `y` vectors for a dataset file using `pandas`
 
    ```python
-   def LoadData(path=config.path_single):
+   def LoadAndProcessData(path=config.path_single):
 
        print('[INFO] Load the data and extract features')
        isinstance(path, str)
@@ -124,7 +124,7 @@ P1	mol_id	smiles
   ```
 - Evaluate the model by computing accuracy
   ```python
-      accuracy = metrics.accuracy_score(y_true, y_pred)
+  accuracy = metrics.accuracy_score(y_true, y_pred)
   ```
 
 # Project Structure
@@ -277,7 +277,7 @@ To do that we need to create two files, `setup.py` and `cli.py`
    ```python
     import sys
     import click
-    from servier.src.main import Train, Predict, Evaluate, LoadData, SplitDataset
+    from servier.src.main import Train, Predict, Evaluate, LoadAndProcessData, SplitDataset
 
 
     @click.group()
@@ -291,7 +291,7 @@ To do that we need to create two files, `setup.py` and `cli.py`
     @click.option('--data_path', '-d', type=str, required=True, default='servier/data/dataset_single.csv', help="Please enter the path of data in order to train the model")
     def train(data_path):
         """Train a machine learning model for prediction and save the pretrained model to disk"""
-        X, y = LoadData(data_path)
+        X, y = LoadAndProcessData(data_path)
         X_train, X_valid, y_train, y_valid = SplitDataset(X, y)
         click.echo(Train(X_train, y_train))
 
@@ -491,7 +491,7 @@ with `flask_api.py`
 
 ```python
 from flask import Flask
-from servier.src.main import Predict, LoadData
+from servier.src.main import Predict, LoadAndProcessData
 
 app = Flask(__name__)
 
@@ -545,7 +545,7 @@ Source code:
 
 ```python
 from flask import Flask
-from servier.src.main import Predict, LoadData
+from servier.src.main import Predict, LoadAndProcessData
 
 app = Flask(__name__)
 
@@ -577,6 +577,12 @@ If everything works fine, on the browser you should see something like that:
 
 and on the terminal you should expect something like that:
 ![test_terminal](servier/media/test_terminal.png)
+
+# Futur work
+
+- Tune hyperparameter of RandomForest model
+- Implement Stratified Cross Validation
+- Implement others Machine Learning model
 
 # Found an issue ? or You want to contribute?
 

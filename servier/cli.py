@@ -1,6 +1,6 @@
 import sys
 import click
-from servier.src.main import Train, Predict, Evaluate, LoadData, SplitDataset
+from servier.src.main import Train, Predict, Evaluate, LoadAndProcessData, SplitDataset
 
 
 @click.group()

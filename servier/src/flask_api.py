@@ -1,5 +1,5 @@
 from flask import Flask
-from servier.src.main import Predict, LoadData
+from servier.src.main import Predict
 
 app = Flask(__name__)
 
