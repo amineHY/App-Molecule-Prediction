@@ -92,7 +92,7 @@ def create_folds_stratefied(path_dataset):
 
 def Train(data_path=config.MODEL_OUTPUT['single']):
     """
-    Train a machine learning model to perform prediction of basic preperties of a molecule
+    Train a machine learning model to perform prediction of basic preperties of a molecule from its fingerprint features
     Input: path to csv file of the dataset
     """
 

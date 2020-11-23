@@ -26,16 +26,19 @@
 
 ## What in this project ?
 
-This project predict basic molecule's properties using machine learning model
+This project predict basic molecule's properties, from its fingerprint features, using machine learning
 
+- Setup python environment using `miniconda`
 - Parse argument from the CLI
 - Load a dataset and perform feature extraction
-- Train a regression machine learning model, then
-- Save the pretrained model for to perform prediction
-- Predict the molecule properties
+- Split the dataset
+- Train a classification machine learning model
+- Save the pretrained model
+- Predict the molecule properties using pretrained model
 - Evaluate the model
-
-In addition, a Flask API is developed to perform prediction
+- Package the app inside a docker image
+- Access the `predict` method via a `Flask` API
+- Documentation
 
 # Data Exploration
 
@@ -133,7 +136,6 @@ In addition, a Flask API is developed to perform prediction
 This project is organized as follow
 
 ```
-
 .
 ├── Dockerfile
 ├── environment.yaml
@@ -157,7 +159,6 @@ This project is organized as follow
 │ ├── feature_extractor.py
 │ └── main.py
 └── setup.py
-
 ```
 
 # Setup the development environment
@@ -584,6 +585,7 @@ and on the terminal you should expect something like that:
 - Tune hyperparameter of RandomForest model
 - Implement Stratified Cross Validation
 - Implement others Machine Learning model
+- Improve the interaction with the app
 
 # Found an issue ? or You want to contribute?
 
