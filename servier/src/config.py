@@ -4,7 +4,7 @@ path_multi = 'servier/data/dataset_multi.csv'
 MODEL_OUTPUT = {'single': 'servier/models/model_pred_single.bin',
                 'multi': 'servier/models/model_pred_multi.bin'}
 
-# RandomForest paraleter
+# RandomForest parameter
 n_est = 100
 max_depth = 12
 
