@@ -19,6 +19,7 @@
   - [Setup](#setup-2)
   - [Simplify the execution with a script](#simplify-the-execution-with-a-script)
   - [Create a Prediction Endpoint](#create-a-prediction-endpoint)
+- [Futur work](#futur-work)
 - [Found an issue ? or You want to contribute?](#found-an-issue--or-you-want-to-contribute)
 
 # Documentation
