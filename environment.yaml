@@ -1,0 +1,16 @@
+name: servier
+
+channels:
+  - conda-forge
+  - anaconda
+dependencies:
+  - rdkit
+  - flask
+  - gunicorn
+  - pip
+  - numpy
+  - pandas
+  - matplotlib
+  - scikit-learn
+  - click
+  #  - pip:
