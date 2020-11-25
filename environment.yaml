@@ -1,4 +1,4 @@
-name: servier
+name: app
 
 channels:
   - conda-forge

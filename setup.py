@@ -1,15 +1,15 @@
 from setuptools import setup
 
 setup(
-    name="servier",
+    name="predmol",
     version="1.0.0",
     license='MIT',
     author='Amine Hadj-Youcef',
     author_email='amine.hadjyoucef@gmail.com',
     description='This application uses machine learning to predict basic properties of a molecule...',
-    packages=["servier"],
+    packages=["app"],
     entry_points='''
         [console_scripts]
-        servier = servier.cli:main
+        predmol = app.cli:main
         '''
 )

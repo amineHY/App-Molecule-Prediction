@@ -1,5 +1,5 @@
 from flask import Flask
-from servier.src.main import Predict
+from app.src.main import Predict
 
 app = Flask(__name__)
 
@@ -13,9 +13,9 @@ def hello():
 def predict(path_X_test):
     """
     Example: 
-    path_X_test=servier/data/dataset_single.csv
+    path_X_test=app/data/dataset_single.csv
     Link: 
-        http://127.0.0.1:5000/predict/servier/data/dataset_single.csv
+        http://127.0.0.1:5000/predict/app/data/dataset_single.csv
     """
     isinstance(path_X_test, str)
     y_pred = Predict(path_X_test)

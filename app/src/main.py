@@ -5,8 +5,8 @@ import time
 import joblib
 import numpy as np
 import pandas as pd
-import servier.src.config as config
-import servier.src.feature_extractor as fe
+import app.src.config as config
+import app.src.feature_extractor as fe
 from sklearn import metrics
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split

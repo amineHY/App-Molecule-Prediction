@@ -8,6 +8,6 @@ COPY . $APP_HOME
 #---------------- Prepare the envirennment
 RUN conda update --name base conda &&\
     conda env create --file environment.yaml
-SHELL ["conda", "run", "--name", "servier", "/bin/bash", "-c"]
+SHELL ["conda", "run", "--name", "app", "/bin/bash", "-c"]
 
-ENTRYPOINT ["conda", "run", "--name", "servier", "python", "src/main.py"]
+ENTRYPOINT ["conda", "run", "--name", "app", "python", "src/main.py"]

@@ -54,7 +54,7 @@ This project predict basic molecule's properties, from its fingerprint features,
 ```
 
 1. The target we want to predict is binary, 0 or 1. A classification model (such as RandomForest) is suitable for this problem
-   ![P1](servier/media/P1.png)
+   ![P1](app/media/P1.png)
 2. The target (`P1`) had 82.17% (4108) of 1's and 17.82% (891) of 0's
 
    ```
@@ -141,7 +141,7 @@ This project is organized as follow
 ├── environment.yaml
 ├── README.md
 ├── run_flask_api.sh
-├── servier
+├── app
 │   ├── cli.py
 │   ├── data
 │   │   ├── dataset_multi.csv
@@ -187,23 +187,23 @@ This project is organized as follow
    conda update -n base conda
    ```
 
-   Create and activate a virtual environment `servier`
+   Create and activate a virtual environment `app`
 
    ```
-   conda create -y --name servier python=3.6
-   conda activate servier
+   conda create -y --name app python=3.6
+   conda activate app
    ```
 
 3. Install required packages
 
    ```
-   conda env update -n servier --file environment.yaml
+   conda env update -n app --file environment.yaml
    ```
 
    with `environment.yaml`
 
    ```yaml
-   name: servier
+   name: app
    channels:
      - conda-forge
      - anaconda
@@ -221,10 +221,10 @@ This project is organized as follow
 
 4. Check if the environment is activated:
 
-   If the setup is correctly done, the name of the environment `(servier)` should appear at the beginning, like that:
+   If the setup is correctly done, the name of the environment `(app)` should appear at the beginning, like that:
 
    ```
-   (servier) amine@amine-HP-ZBook-15-G2:~/$
+   (app) amine@amine-HP-ZBook-15-G2:~/$
    ```
 
 # Running the App
@@ -232,7 +232,7 @@ This project is organized as follow
 You can run the App from a terminal by executing the `main.py` file with `python3`
 
 ```shell
-python3 servier/src/main.py --help
+python3 app/src/main.py --help
 ```
 
 output
@@ -248,7 +248,7 @@ optional arguments:
 Example:
 
 ```shell
-python3 servier/src/main.py --data servier/data/dataset_single.csv
+python3 app/src/main.py --data app/data/dataset_single.csv
 ```
 
 # Packaging the App
@@ -263,16 +263,16 @@ To do that we need to create two files, `setup.py` and `cli.py`
    from setuptools import setup
 
    setup(
-       name="servier",
+       name="predmol",
        version="1.0.0",
        license='MIT',
        author='Amine Hadj-Youcef',
        author_email='amine.hadjyoucef@gmail.com',
        description='This application uses machine learning to predict basic properties of a molecule...',
-       packages=["servier"],
+       packages=["app"],
        entry_points='''
            [console_scripts]
-           servier = servier.cli:main
+           predmol = app.cli:main
            '''
    )
    ```
@@ -282,7 +282,7 @@ To do that we need to create two files, `setup.py` and `cli.py`
    ```python
     import sys
     import click
-    from servier.src.main import Train, Predict, Evaluate, LoadAndProcessData, SplitDataset
+    from app.src.main import Train, Predict, Evaluate, LoadAndProcessData, SplitDataset
 
 
     @click.group()
@@ -293,7 +293,7 @@ To do that we need to create two files, `setup.py` and `cli.py`
 
 
     @main.command()
-    @click.option('--data_path', '-d', type=str, required=True, default='servier/data/dataset_single.csv', help="Please enter the path of data in order to train the model")
+    @click.option('--data_path', '-d', type=str, required=True, default='app/data/dataset_single.csv', help="Please enter the path of data in order to train the model")
     def train(data_path):
         """Train a machine learning model for prediction and save the pretrained model to disk"""
         X, y = LoadAndProcessData(data_path)
@@ -322,7 +322,7 @@ To do that we need to create two files, `setup.py` and `cli.py`
 
 ## Install the packaged App
 
-Install the `servier` package by entering in the terminal (from the root of the project)
+Install the `predmol` package by entering in the terminal (from the root of the project)
 
 ```
 pip install -e .
@@ -331,24 +331,24 @@ pip install -e .
 Check if the app is correctly installed
 
 ```
-which servier
-/home/amine/miniconda/envs/servier/bin/servier
+which predmol
+/home/amine/miniconda/envs/app/bin/predmol
 ```
 
-the application is correctly installed under the `servier` environment.
+the application is correctly installed under the `app` environment.
 
 ## How to use it?
 
 Issue the following command to know how to use the App
 
 ```
-servier --help
+predmol --help
 ```
 
 output:
 
 ```
-Usage: servier [OPTIONS] COMMAND [ARGS]...
+Usage: predmol [OPTIONS] COMMAND [ARGS]...
 
 Molecule's basic properties prediction App
 
@@ -365,11 +365,11 @@ train Train a machine learning model for prediction
 For instance, in order to invoke the `train` command, you can do
 
 ```shell
-servier train --help
+premol train --help
 ```
 
 ```shell
-Usage: servier train [OPTIONS]
+Usage: predmol train [OPTIONS]
 
 Train a machine learning model for prediction and save the pretrained
 model to disk
@@ -384,17 +384,17 @@ Options:
 so you need to mention the path to the dataset you want to train your model on
 
 ```
-servier train --data_path servier/data/dataset_single.csv
+predmol train --data_path app/data/dataset_single.csv
 ```
 
 Similarly, you can use `predict` and `evaluate` commands:
 
 ```
-servier predict --help
+predmol predict --help
 ```
 
 ```
-Usage: servier predict [OPTIONS]
+Usage: predmol predict [OPTIONS]
 
   Perform prediction using a pretrained Machine Learning prediction model
 
@@ -408,11 +408,11 @@ Options:
 and
 
 ```
-servier evaluate --help
+predmol evaluate --help
 ```
 
 ```
-Usage: servier evaluate [OPTIONS]
+Usage: predmol evaluate [OPTIONS]
 
   Evaluate the prediction model
 
@@ -446,17 +446,17 @@ COPY . $APP_HOME
 #---------------- Prepare the envirennment
 RUN conda update --name base conda &&\
     conda env create --file environment.yaml
-SHELL ["conda", "run", "--name", "servier", "/bin/bash", "-c"]
+SHELL ["conda", "run", "--name", "app", "/bin/bash", "-c"]
 
-ENTRYPOINT ["conda", "run", "--name", "servier", "python", "src/main.py"]
+ENTRYPOINT ["conda", "run", "--name", "app", "python", "src/main.py"]
 ```
 
 ## Build a docker image
 
-We build a docker image, named `servier`, with the following commands
+We build a docker image, named `app`, with the following commands
 
 ```
-docker build --tag servier .
+docker build --tag app .
 ```
 
 **Note:**
@@ -467,10 +467,10 @@ docker build --tag servier .
 
 ## Run the docker image
 
-To run the App from the docker image we created (`servier`)
+To run the App from the docker image we created (`app`)
 
 ```
-docker run --rm -ti servier
+docker run --rm -ti app
 ```
 
 # Flask API
@@ -482,10 +482,10 @@ Another way to distribute and use the App is by packaging it as an API, for inst
 Install `Flask` inside conda virtual environment
 
 ```
-conda install -n servier -c anaconda flask
+conda install -n app -c anaconda flask
 ```
 
-Create a python file for the api (`servier/src/flask_api.py`) and configure `Flask`
+Create a python file for the api (`app/src/flask_api.py`) and configure `Flask`
 
 ```
 export FLASK_APP=api
@@ -496,7 +496,7 @@ with `flask_api.py`
 
 ```python
 from flask import Flask
-from servier.src.main import Predict, LoadAndProcessData
+from app.src.main import Predict, LoadAndProcessData
 
 app = Flask(__name__)
 
@@ -517,7 +517,7 @@ flask run
 Open the browser on the port 5000 to check if the API is running:
 http://127.0.0.1:5000/
 
-![test_flask](servier/media/test_flask.png)
+![test_flask](app/media/test_flask.png)
 
 ## Simplify the execution with a script
 
@@ -528,7 +528,7 @@ For simplifying the setup I created a script (`run_flask_api.sh`) to gather `Fla
 ```shell
 #!/bin/bash
 
-export FLASK_APP=servier/src/flask_api.py
+export FLASK_APP=app/src/flask_api.py
 export FLASK_ENV=development
 
 flask run --port 5000
@@ -542,7 +542,7 @@ sh run_flask_api.sh
 
 ## Create a Prediction Endpoint
 
-To create a prediction endpoint, we import the `Prediction` method from the main file (`servier/src/main.py`) and create an endpoint for it in the flask API.
+To create a prediction endpoint, we import the `Prediction` method from the main file (`app/src/main.py`) and create an endpoint for it in the flask API.
 
 The endpoint takes two arguments parameters: the model path and the dataset path, `path_model`, `path_X_test`, respectively.
 
@@ -550,7 +550,7 @@ Source code:
 
 ```python
 from flask import Flask
-from servier.src.main import Predict, LoadAndProcessData
+from app.src.main import Predict, LoadAndProcessData
 
 app = Flask(__name__)
 
@@ -562,9 +562,9 @@ def hello():
 def predict(path_X_test):
     """
     Example:
-    path_X_test=servier/data/dataset_single.csv
+    path_X_test=app/data/dataset_single.csv
     Link:
-        http://127.0.0.1:5000/predict/servier/data/dataset_single.csv
+        http://127.0.0.1:5000/predict/app/data/dataset_single.csv
     """
     isinstance(path_X_test, str)
     y_pred = Predict(path_X_test)
@@ -574,14 +574,14 @@ if __name__ == '__main__':
     app.run('0.0.0.0', 5000)
 ```
 
-Access the predict endpoint of the API with this URL: [http://127.0.0.1:5000/predict/servier/data/dataset_single.csv
-](http://127.0.0.1:5000/predict/servier/data/dataset_single.csv)
+Access the predict endpoint of the API with this URL: [http://127.0.0.1:5000/predict/app/data/dataset_single.csv
+](http://127.0.0.1:5000/predict/app/data/dataset_single.csv)
 
 If everything works fine, on the browser you should see something like that:
-![test_api](servier/media/test_api.png)
+![test_api](app/media/test_api.png)
 
 and on the terminal you should expect something like that:
-![test_terminal](servier/media/test_terminal.png)
+![test_terminal](app/media/test_terminal.png)
 
 # Futur work
 

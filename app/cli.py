@@ -1,6 +1,6 @@
 import sys
 import click
-from servier.src.main import Train, Predict, Evaluate
+from app.src.main import Train, Predict, Evaluate
 
 
 @click.group()
@@ -11,14 +11,14 @@ def main():
 
 
 @main.command()
-@click.option('--data_path', '-d', type=str, required=True, default='servier/data/dataset_single.csv', help="Please enter the path of data in order to train the model")
+@click.option('--data_path', '-d', type=str, required=True, default='app/data/dataset_single.csv', help="Please enter the path of data in order to train the model")
 def train(data_path):
     """Train a machine learning model for prediction and save the pretrained model to disk"""
     click.echo(Train(data_path))
 
 
 @main.command()
-@click.option('--path_x_test', '-p', type=str, required=True, default='servier/data/dataset_single.csv', help="Please enter the path of data in order to perform prediction")
+@click.option('--path_x_test', '-p', type=str, required=True, default='app/data/dataset_single.csv', help="Please enter the path of data in order to perform prediction")
 def predict(path_x_test):
     """Perform prediction using a pretrained Machine Learning prediction model"""
     Predict(path_x_test)
